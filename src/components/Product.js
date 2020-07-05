@@ -14,12 +14,14 @@ export default class Product extends Component {
                 <div className='card'>
                     <ProductConsumer>
                     {value => (        
-                        <div className='img-container p-5' onClick={() => {
+                        <div className='img-container p-5'>
+
+                        <img src={img} alt='product' className='card-img-top'/>
+                       
+                        <Link to='/details'><button className='detail-btn' onClick={() => {
                             value.handleDetail(id);
-                            }}>
-                        <Link to='/details'>
-                            <img src={img} alt='product' className='card-img-top'/>
-                        </Link>
+                            }}>View Details</button></Link>
+                       
                         <button className='cart-btn' disabled={inCart ? true : false} onClick={() => {
                             value.addToCart(id);
                             value.openModal(id);
@@ -30,7 +32,7 @@ export default class Product extends Component {
                                     {" "}
                                     in Cart
                                 </p>
-                            ): ( <i className='fas fa-cart-plus'/>
+                            ): ( <p className='mb-0'>Add to Cart</p>
                             )}
                         </button>
                         </div>
@@ -86,29 +88,43 @@ const ProductWrapper = styled.div`
         position: relative;
         overflow:hidden;
     }
-    .card-img-top {
-        transition: all 0.6s linear;
-    }
-    .img-container:hover .card-img-top {
-        transform: scale(1.2);
-    }
+
     .cart-btn {
         position: absolute;
-        bottom: 0;
+        bottom:-2px;
         right: 0;
         padding: 0.2rem 0.4rem;
         background:var(--lightBlue);
         border: none;
         color:var(--mainWhite);
-        font-size:1.4rem;
-        transform: translate(100%, 100%);
-        transition: all 0.6s linear;
+        font-size:1.2rem;
+        transform: translate(0%, 100%);
+        transition: all 0.4s linear;
+    }
+    .detail-btn {
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        padding: 0.2rem 0.4rem;
+        background:var(--mainYellow);
+        border: none;
+        color:var(--mainWhite);
+        font-size:1.2rem;
+        transform: translate(0%, 100%);
+        transition: all 0.4s linear;
     }
     .img-container:hover .cart-btn {
         transform: translate(0,0);
     }
+    .img-container:hover .detail-btn {
+        transform: translate(0,0);
+    }
     .cart-btn:hover {
         color: var(--mainBlue);
+        cursor:pointer;
+    }
+    .detail-btn:hover {
+        color: var(--dYellow);
         cursor:pointer;
     }
 `;
